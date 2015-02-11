@@ -147,7 +147,7 @@ def create_tree(texts):
 
 path = list_textfiles("/Users/elena/Documents/BBK")
 
-
+#считывается текст
 texts = [read_file(filepath) for filepath in path]
 
 result = create_tree(texts)
@@ -160,7 +160,7 @@ for i in xrange(0, len(texts)):
     for j in xrange(0,len(texts[i])):
         bbk_words.append(split_str(texts[i][j])[1])
 
-
+#в bbk_final будет список всех слов
 bbk_final = []
 split_bbk = []
 for bbk_word in bbk_words:
@@ -178,8 +178,7 @@ for bbk_word in bbk_words:
         for elem in split_bbk:
             bbk_final.append(elem)
 
-print bbk_final[19]
-print len(bbk_final)
+
 
 def getUniqueWords(allWords) :
     uniqueWords = []
@@ -187,7 +186,7 @@ def getUniqueWords(allWords) :
         if not i in uniqueWords:
             uniqueWords.append(i)
     return uniqueWords
-
+#вот здесь запись в файл, записываются все слова
 f = open('/Users/elena/Desktop/bbk.txt','w')
 
 for sentence in bbk_final:
@@ -195,25 +194,3 @@ for sentence in bbk_final:
 f.close()
 
 
-t = Tree()
-for i in result:t.push(i)
-
-
-G = AGraph()
-
-
-for i in xrange(0,len(result)):
-    G.add_edge(result[i][0].decode('utf8'), result[i][1].decode('utf8'),color='plum', style='filled', shape='box')
-
-G.layout(prog='dot')
-G.draw('file.png')
-
-
-
-
-letters = ['Г', "Н","П","С","Т","У","А","Б","В","Е","Ж","З","И","К","Л","М","О","Ф","Х"]
-count_letters = [2623,2428,7073,1283,9390,8872,1013,97,9146,5972,882,4409,986,2677,2422,1508,2731,2549,3653]
-
-
-
-#plt.plot(letters,count_letters)
