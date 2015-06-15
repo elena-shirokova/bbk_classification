@@ -11,6 +11,12 @@ class Node:
             child.print_(level + 1)
 
 
+
+
+
+
+
+
 class Tree:
     def __init__ (self):
         self.nodes = {}
@@ -35,3 +41,6 @@ class Tree:
 
 
 
+for i in xrange(0,len(texts)):
+    filename = 'bbk' + str(i)
+    write_to_file(get_words_bbk(split_text(texts[i])),filename)

@@ -1,7 +1,7 @@
 #! /usr/local/bin/python
 # -*- coding: utf8 -*-
 from os import listdir
-from tree_bbk import Tree
+
 from pygraphviz import *
 import pickle
 import macholib as plt
@@ -42,6 +42,22 @@ def split_str(text):
         elif elements == "	":
 
             return text.split("	")
+
+        elif elements == "     ":
+
+            return text.split("     ")
+
+        elif elements == "      ":
+
+            return text.split("      ")
+
+        elif elements == "      ":
+
+            return text.split("      ")
+
+        elif elements == "	":
+
+            return text.split("      ")
 
 
 def list_bbk(texts):
@@ -145,52 +161,59 @@ def create_tree(texts):
 
     return tree
 
-path = list_textfiles("/Users/elena/Documents/BBK")
-
-#считывается текст
-texts = [read_file(filepath) for filepath in path]
-
-result = create_tree(texts)
-print len(texts)
+#path = list_textfiles("/Users/elena/Documents/BBK")
 
 
-bbk_words = []
-
-for i in xrange(0, len(texts)):
-    for j in xrange(0,len(texts[i])):
-        bbk_words.append(split_str(texts[i][j])[1])
-
-#в bbk_final будет список всех слов
-bbk_final = []
-split_bbk = []
-for bbk_word in bbk_words:
-
-
-    if " -- " not in bbk_word:
-        bbk_final.append(bbk_word)
-
-    elif " -- " in bbk_word:
-
-        split_bbk = bbk_word.split(" -- ")
-
-        bbk_words.remove(bbk_word)
-
-        for elem in split_bbk:
-            bbk_final.append(elem)
+#texts = [read_file(filepath) for filepath in path]
 
 
 
-def getUniqueWords(allWords) :
-    uniqueWords = []
-    for i in allWords:
-        if not i in uniqueWords:
-            uniqueWords.append(i)
-    return uniqueWords
-#вот здесь запись в файл, записываются все слова
-f = open('/Users/elena/Desktop/bbk.txt','w')
 
-for sentence in bbk_final:
-    f.write(sentence + '\n')
-f.close()
+
+
+
+def split_text(texts):
+    bbk_words = []
+    for j in xrange(0,len(texts)):
+        bbk_words.append(split_str(texts[j])[1])
+    return bbk_words
+
+
+
+
+def get_words_bbk(bbk_words):
+    bbk_final = []
+
+    split_bbk = []
+    for bbk_word in bbk_words:
+
+        if " -- " not in bbk_word:
+            bbk_final.append(bbk_word)
+
+        elif " -- " in bbk_word:
+
+            split_bbk = bbk_word.split(" -- ")
+
+            bbk_words.remove(bbk_word)
+
+            for elem in split_bbk:
+                bbk_final.append(elem)
+
+    return bbk_final
+
+def write_to_file(bbk_final, filename):
+
+        with open(filename,'w') as f:
+            for sentence in bbk_final:
+                f.write(sentence + '\n')
+        f.close()
+
+
+
+
+
+
+
+
 
 
